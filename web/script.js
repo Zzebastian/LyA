@@ -69,28 +69,44 @@ function agregarProductos(listaDeProductos) {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card h-100 shadow-sm';
 
+    // Se crea un enlace <a> que envuelve la imagen
+    const enlaceImagen = document.createElement('a');
+    enlaceImagen.href = `productos/${id}.html`; // Aquí se construye la URL
+
     const img = new Image();
     img.className = 'card-img-top';
     img.alt = nombre;
     img.src = url_imagen;
     
-    // Aquí está el cambio clave: si la imagen no se carga, usa la de fallback
+    // Si la imagen no se carga, usa la de fallback
     img.onerror = () => {
         img.src = IMG_NO_ENCONTRADA_URL;
     };
 
+    enlaceImagen.appendChild(img);
+
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body d-flex flex-column';
+    
+    // Se crea un enlace <a> que envuelve el nombre
+    const enlaceNombre = document.createElement('a');
+    enlaceNombre.href = `productos/${id}.html`; // Aquí se construye la URL
+    enlaceNombre.className = "card-title h5 text-decoration-none text-dark";
+    enlaceNombre.textContent = nombre || 'Sin nombre';
+
     cardBody.innerHTML = `
-        <h5 class="card-title">${nombre || 'Sin nombre'}</h5>
-        <p class="card-text text-muted">Tipo: ${tipo}</p>
-        <p class="card-text text-muted">Piedra: ${piedra || 'N/A'}</p>
-        <p class="card-text comentario-text">${comentario || ''}</p>
-        <a href="#" class="btn btn-primary mt-auto">Agregar</a>
-        <a href="#" class="btn btn-primary mt-auto">Comprar</a>
+      <p class="card-text text-muted">Tipo: ${tipo}</p>
+      <p class="card-text text-muted">Piedra: ${piedra || 'N/A'}</p>
+      <p class="card-text comentario-text">${comentario || ''}</p>
     `;
 
-    cardDiv.appendChild(img);
+    // Reemplazamos la etiqueta h5 por el enlace
+    cardBody.prepend(enlaceNombre);
+
+    // Se remueve la línea que crea el botón "Ver detalle"
+    // No hay necesidad de agregar el botón aquí
+
+    cardDiv.appendChild(enlaceImagen);
     cardDiv.appendChild(cardBody);
     colDiv.appendChild(cardDiv);
 
@@ -99,6 +115,8 @@ function agregarProductos(listaDeProductos) {
   
   productosMostrados = finDeCarga;
 }
+
+// ... El resto del script sigue igual ...
 
 // Función que se dispara al hacer scroll
 function cargarMasProductos() {
