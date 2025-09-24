@@ -1,0 +1,26 @@
+﻿.etiqueta {
+    background-color: beige;
+    border: solid 1px;
+    width: 62mm;
+    height: 90mm;
+}
+.etiqueta h2 {
+    border: solid 1px;
+    height: 17mm;
+    margin: 0;
+    text-align: center;
+    
+}
+.etiqueta p {
+    border: solid 1px;
+    margin: 0 0;
+}
+.imagen {
+    border: solid 1px;
+    background-color: aqua;
+    width: 30mm;
+    height: 30mm;
+    display: flex;
+    margin: 0 auto;   
+    text-align: center;
+}

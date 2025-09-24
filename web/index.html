@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <title>Mi Catálogo</title>
+</head>
+
+<body>
+
+  <h1 class="text-center my-4">Catálogo de Joyería</h1>
+  <p class="text-center text-muted">Explora nuestra colección de piezas únicas.</p>
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="filtroTipo" class="form-label">Filtrar por Tipo</label>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownTipo" data-bs-toggle="dropdown" aria-expanded="false">
+            Todos
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownTipo" id="filtroTipo">
+            <li><a class="dropdown-item" href="#" data-value="todos">Todos</a></li>
+            <li><a class="dropdown-item" href="#" data-value="Collar">Collares</a></li>
+            <li><a class="dropdown-item" href="#" data-value="Pulsera">Pulseras</a></li>
+            <li><a class="dropdown-item" href="#" data-value="Conjunto">Conjuntos</a></li>
+            <li><a class="dropdown-item" href="#" data-value="Piedra">Lámparas</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="filtroPiedra" class="form-label">Filtrar por Piedra</label>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownPiedra" data-bs-toggle="dropdown" aria-expanded="false">
+            Todas
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownPiedra" id="filtroPiedra">
+            <li><a class="dropdown-item" href="#" data-value="todas">Todas</a></li>
+            <li><a class="dropdown-item" href="#" data-value="amatista">Amatista</a></li>
+            <li><a class="dropdown-item" href="#" data-value="jade">Jade</a></li>
+            <li><a class="dropdown-item" href="#" data-value="turmalina">Turmalina</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row" id="catalogo-container">
+      </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  
+  <script src="script.js"></script>
+  <script>
+    // Inicializar el catálogo al cargar la página
+    generarCatalogo("./catalogo/catalogo.json");
+  </script>
+
+</body>
+
+</html>
