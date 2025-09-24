@@ -5,6 +5,9 @@ let productosMostrados = 0; // Contador de productos mostrados
 
 const PRODUCTOS_POR_CARGA = 20; // Define cuántos productos se muestran por tanda
 
+// URL de la imagen de fallback
+const IMG_NO_ENCONTRADA_URL = "./image/imgNoEncontrada.png";
+
 // Función principal para cargar el catálogo
 async function generarCatalogo(url) {
   try {
@@ -59,21 +62,39 @@ function agregarProductos(listaDeProductos) {
     const comentario = producto.comentario[0];
     const url_imagen = producto.url;
 
-    const tarjeta = `
-      <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-          <img src="${url_imagen}" class="card-img-top" alt="${nombre}">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">${nombre || 'Sin nombre'}</h5>
-            <p class="card-text text-muted">Tipo: ${tipo}</p>
-            <p class="card-text text-muted">Piedra: ${piedra || 'N/A'}</p>
-            <p class="card-text comentario-text">${comentario || ''}</p>
-            <a href="#" class="btn btn-primary mt-auto">Ver detalle</a>
-          </div>
-        </div>
-      </div>
+    // Crea la tarjeta de forma programática para usar el evento 'onerror'
+    const colDiv = document.createElement('div');
+    colDiv.className = 'col-sm-6 col-md-4 col-lg-3 mb-4';
+
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card h-100 shadow-sm';
+
+    const img = new Image();
+    img.className = 'card-img-top';
+    img.alt = nombre;
+    img.src = url_imagen;
+    
+    // Aquí está el cambio clave: si la imagen no se carga, usa la de fallback
+    img.onerror = () => {
+        img.src = IMG_NO_ENCONTRADA_URL;
+    };
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body d-flex flex-column';
+    cardBody.innerHTML = `
+        <h5 class="card-title">${nombre || 'Sin nombre'}</h5>
+        <p class="card-text text-muted">Tipo: ${tipo}</p>
+        <p class="card-text text-muted">Piedra: ${piedra || 'N/A'}</p>
+        <p class="card-text comentario-text">${comentario || ''}</p>
+        <a href="#" class="btn btn-primary mt-auto">Agregar</a>
+        <a href="#" class="btn btn-primary mt-auto">Comprar</a>
     `;
-    contenedor.innerHTML += tarjeta;
+
+    cardDiv.appendChild(img);
+    cardDiv.appendChild(cardBody);
+    colDiv.appendChild(cardDiv);
+
+    contenedor.appendChild(colDiv);
   }
   
   productosMostrados = finDeCarga;
